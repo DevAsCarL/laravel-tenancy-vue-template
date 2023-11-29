@@ -28,8 +28,12 @@
 </template>
 
 <script setup lang="ts">
+
 import { ref } from 'vue';
-import { useForm } from '@inertiajs/inertia-vue3';
+import { useForm } from '@inertiajs/vue3';
+import route from 'ziggy-js';
+
+
 const props = defineProps({
     email: String,
     password: String,

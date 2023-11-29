@@ -1,5 +1,5 @@
+
 import { ZiggyVue } from "ziggy-vue";
-import route from "ziggy";
 import Axios from "axios";
 //QUASAR
 import { Quasar } from "quasar";

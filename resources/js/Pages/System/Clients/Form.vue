@@ -1,5 +1,5 @@
 <template>
-    <q-dialog v-model="showDialog" @hide="close" @show="create">
+    <q-dialog v-model="show" @hide="close" @show="create">
         <q-card style="width: 600px; max-width: 80vw;">
             <q-card-section class="q-pt-none">
                 <q-form @submit.prevent="submit" class="row py-4 q-pa-md q-gutter-sm justify-center">
@@ -78,9 +78,10 @@ import { useQuasar } from "quasar";
 const props = defineProps(["showDialog", "recordId"]);
 const emit = defineEmits(['onCreate', 'update:showDialog'])
 const $message = useQuasar();
-let loading_submit = ref(false);
-let loading_search = ref(false);
-let titleDialog = ref<string | null>(null);
+const loading_submit = ref<boolean>(false);
+const loading_search = ref<boolean>(false);
+const show = ref<boolean>(props.showDialog);
+const titleDialog = ref<string | null>(null);
 const resource = "clients";
 let errors = ref({});
 let form = reactive({
@@ -98,7 +99,7 @@ let form = reactive({
 });
 let url_base = ref<string | null>(null);
 let plans = ref<any[]>([]);
-const isPwd = ref(<boolean>true);
+const isPwd = ref<boolean>(true);
 onMounted(() => {
     initForm();
     axios.get(`/${resource}/tables`).then((response) => {
