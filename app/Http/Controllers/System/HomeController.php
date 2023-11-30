@@ -11,4 +11,8 @@ class HomeController extends Controller
     {
         return Inertia::render('System/Clients/Index');
     }
+    public function index2()
+    {
+        return Inertia::render('System/Home/Index');
+    }
 }

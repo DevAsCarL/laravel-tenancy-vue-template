@@ -3,11 +3,11 @@
         <title></title>
     </Head>
 
-    <div class="min-h-full">
+    <div class="tw-min-h-full">
         <!-- <Header :menu="menu" /> -->
 
         <main>
-            <div class="mx-auto max-w-2xl  px-4 sm:px-6 lg:px-8">
+            <div class="tw-mx-auto tw-max-w-2xl  tw-px-4 sm:tw-px-6 lg:tw-px-8">
                 <slot />
             </div>
         </main>
