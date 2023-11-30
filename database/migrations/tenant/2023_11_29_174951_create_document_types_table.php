@@ -16,7 +16,7 @@ class CreateDocumentTypesTable extends Migration
             $table->id();
             $table->string('short', 255)->nullable();
             $table->string('description', 255);
-            $table->foreignIdFor(Status::class)->constrained('status')->cascadeOnDelete()->default(1);
+            $table->foreignIdFor(Status::class)->default(1)->constrained('status')->cascadeOnDelete();
             $table->timestamps();
         });
     }

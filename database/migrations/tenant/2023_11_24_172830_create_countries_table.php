@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\System\Status;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -15,7 +16,7 @@ class CreateCountriesTable extends Migration
             $table->id();
             $table->string('short', 3);
             $table->string('description');
-            $table->foreignIdFor(Status::class)->constrained('status')->cascadeOnDelete()->default(2);
+            $table->foreignIdFor(Status::class)->default(1)->constrained('status')->cascadeOnDelete();
         });
     }
 

@@ -30,7 +30,7 @@ class TenancyHostnames extends AbstractMigration
             $table->string('redirect_to')->nullable();
             $table->boolean('force_https')->default(false);
             $table->timestamp('under_maintenance_since')->nullable();
-            $table->foreignIdFor(Website::class)->constrained()->nullable();
+            $table->foreignIdFor(Website::class)->nullable()->constrained();
 
             $table->timestamps();
             $table->softDeletes();

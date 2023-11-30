@@ -6,7 +6,11 @@ use Hyn\Tenancy\Abstracts\TenantModel;
 
 class District extends TenantModel
 {
-    public $timestamps = false;
+    protected $fillable = [
+        'description',
+        'province_id',
+        'status_id'
+    ];
 
     static function idByDescription($description, $province_id)
     {

@@ -6,7 +6,10 @@ use Hyn\Tenancy\Abstracts\TenantModel;
 
 class Department extends TenantModel
 {
-    public $timestamps = false;
+    protected $fillable = [
+        'description',
+        'status_id',
+    ];
 
     static function idByDescription($description)
     {

@@ -1,13 +1,17 @@
 <?php
 
-namespace App\Models\Tenant\Catalogs;
+namespace App\Models\Tenant;
 
 use Hyn\Tenancy\Abstracts\TenantModel;
 use Hyn\Tenancy\Traits\UsesTenantConnection;
 
 class Province extends TenantModel
 {
-    public $timestamps = false;
+    protected $fillable = [
+        'description',
+        'department_id',
+        'status_id'
+    ];
 
     static function idByDescription($description)
     {

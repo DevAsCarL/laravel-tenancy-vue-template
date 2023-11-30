@@ -228,7 +228,7 @@ return [
          *
          * @warn specify a valid fully qualified class name.
          */
-        'tenant-seed-class' => \Database\Seeders\Tenant::class,
+        'tenant-seed-class' => \Database\Seeders\Tenant\DatabaseTenantSeeder::class,
         //      eg an admin seeder under `app/Seeders/AdminSeeder.php`:
         //        'tenant-seed-class' => App\Seeders\AdminSeeder::class,
 

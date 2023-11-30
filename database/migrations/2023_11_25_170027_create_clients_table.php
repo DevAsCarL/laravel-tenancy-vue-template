@@ -28,7 +28,7 @@ class CreateClientsTable extends Migration
             $table->string('email');
             $table->string('token');
             $table->boolean('locked')->default(false);
-            $table->foreignIdFor(Status::class)->constrained('status')->cascadeOnDelete()->default(1);
+            $table->foreignIdFor(Status::class)->constrained('status')->default(1)->cascadeOnDelete();
             $table->timestamps();
         });
     }

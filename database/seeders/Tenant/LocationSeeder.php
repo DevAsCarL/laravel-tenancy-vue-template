@@ -2355,6 +2355,6 @@ class LocationSeeder extends Seeder
         DB::connection('tenant')->table('countries')->insert($countries);
         DB::connection('tenant')->table('departments')->insert($departments);
         DB::connection('tenant')->table('provinces')->insert($provinces);
-        DB::connection('tenant')->table('districs')->insert($districts);
+        DB::connection('tenant')->table('districts')->insert($districts);
     }
 }

@@ -1,6 +1,10 @@
 <?php
 
+use App\Models\Tenant\Country;
+use App\Models\Tenant\Department;
+use App\Models\Tenant\District;
 use App\Models\Tenant\DocumentType;
+use App\Models\Tenant\Province;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
@@ -16,11 +20,9 @@ class CreatePersonsTable extends Migration
     {
         Schema::create('persons', function (Blueprint $table) {
             $table->increments('id');
-            $table->enum('type', ['customers', 'suppliers', 'employes']);
-            $table->foreignIdFor(DocumentType::class)->constrained();
-            $table->string('number');
             $table->string('name');
             $table->string('trade_name')->nullable();
+            $table->string('number');
             $table->foreignIdFor(DocumentType::class)->constrained();
             $table->foreignIdFor(Country::class)->constrained();
             $table->foreignIdFor(Department::class)->constrained();

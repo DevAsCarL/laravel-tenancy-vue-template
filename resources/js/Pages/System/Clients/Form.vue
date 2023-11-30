@@ -1,5 +1,5 @@
 <template>
-    <q-dialog v-model="show" @hide="close" @show="create">
+    <q-dialog v-model="props.showDialog" @hide="close" @show="create">
         <q-card style="width: 600px; max-width: 80vw;">
             <q-card-section class="q-pt-none">
                 <q-form @submit.prevent="submit" class="row py-4 q-pa-md q-gutter-sm justify-center">
@@ -39,7 +39,7 @@
                     </q-input>
                     <q-select class="col-12 col-md-5" v-model="form.plan_id" :options="plans" label="Plan" />
 
-                    <q-input class="col-12 col-md-5" filled v-model="form.plan_start_date" mask="date" :rules="['date']">
+                    <q-input class="col-12 col-md-5" filled v-model="form.plan_start_date" mask="date" >
                         <template v-slot:append>
                             <q-icon name="event" class="cursor-pointer">
                                 <q-popup-proxy cover transition-show="scale" transition-hide="scale">

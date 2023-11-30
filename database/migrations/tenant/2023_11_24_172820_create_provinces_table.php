@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\System\Status;
 use App\Models\Tenant\Department;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -16,7 +17,7 @@ class CreateProvincesTable extends Migration
             $table->id();
             $table->string('description');
             $table->foreignIdFor(Department::class)->constrained()->cascadeOnDelete();
-            $table->foreignIdFor(Status::class)->constrained('status')->cascadeOnDelete()->default(2);
+            $table->foreignIdFor(Status::class)->default(1)->constrained('status')->cascadeOnDelete();
         });
     }
 

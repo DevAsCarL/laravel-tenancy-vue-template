@@ -20,7 +20,7 @@ class CreatePaymentHistoryTable extends Migration
             $table->foreignIdFor(Client::class)->constrained()->cascadeOnDelete();
             $table->foreignIdFor(Plan::class)->constrained()->cascadeOnDelete();
             $table->double('amount')->default(0);
-            $table->dateTime('date_payment')->default(now())->nullable();
+            $table->dateTime('date_payment')->default(now());
         });
     }
 
