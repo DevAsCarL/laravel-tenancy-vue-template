@@ -1,5 +1,5 @@
 <template>
-  <q-layout>
+  <q-layout class="tw-mt-24">
     <q-page-container class="row flex justify-center items-center gap-6">
       <div class="row col-12 col-md-6">
         <ChartLine :data="dataChartLine"></ChartLine>
@@ -48,9 +48,9 @@ const total_documents = ref(0);
 const total_payments = ref(0);
 const columns = [
   {
-    name: 'index',
+    name: 'id',
     label: '#',
-    field: 'index'
+    field: 'id'
   },
   { name: 'hostname', align: 'center', label: 'Hostname', field: 'hostname', sortable: true },
   { name: 'name', align: 'center', label: 'Nombre', field: 'name', sortable: true },
@@ -118,8 +118,8 @@ const getData = () => {
     clients_active.value = response.data.clients_active;
     clients_all.value = response.data.clients_all;
   });
-  axios.get(`/${resource}/records?${getQueryParameters()}`).then((response: { data: { data: never[]; }; }) => {
-    records.value = response.data.data;
+  axios.get(`/${resource}/records?${getQueryParameters()}`).then((response: { data: never[]; }) => {
+    records.value = response.data;
     loaded.value = true;
   });
 };

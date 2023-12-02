@@ -1,7 +1,7 @@
 <?php
 
-use App\Models\System\Status;
 use App\Models\Tenant\Province;
+use App\Models\Tenant\Status;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -17,7 +17,7 @@ class CreateDistrictsTable extends Migration
             $table->id();
             $table->string('description');
             $table->foreignIdFor(Province::class)->constrained()->cascadeOnDelete();
-            $table->foreignIdFor(Status::class)->default(1)->constrained('status')->cascadeOnDelete();
+            $table->foreignIdFor(Status::class)->default(Status::ACTIVE)->constrained('status')->cascadeOnDelete();
         });
     }
 

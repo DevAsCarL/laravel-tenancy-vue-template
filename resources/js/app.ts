@@ -1,8 +1,7 @@
-
 import { ZiggyVue } from "ziggy-vue";
 import Axios from "axios";
 //QUASAR
-import { Quasar } from "quasar";
+import { Quasar, Notify } from "quasar";
 import "@quasar/extras/material-icons/material-icons.css";
 import "quasar/src/css/index.sass";
 import { createApp, h } from "vue";
@@ -39,7 +38,10 @@ createInertiaApp({
         Vue.use(plugin).use(ZiggyVue);
 
         Vue.use(Quasar, {
-            plugins: {},
+            plugins: {
+                Notify,
+            },
+            config: {},
         });
         Vue.mixin({ methods: { userCan } });
 

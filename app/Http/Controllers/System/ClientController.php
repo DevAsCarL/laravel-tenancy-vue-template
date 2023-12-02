@@ -15,6 +15,12 @@ use App\Models\System\Client;
 use App\Models\System\PaymentHistory;
 use App\Models\System\Plan;
 use App\Models\System\Status;
+use App\Models\Tenant\Country;
+use App\Models\Tenant\Department;
+use App\Models\Tenant\District;
+use App\Models\Tenant\IdentityDocumentType;
+use App\Models\Tenant\Person;
+use App\Models\Tenant\Province;
 use Hyn\Tenancy\Models\Hostname;
 use Hyn\Tenancy\Models\Website;
 use Illuminate\Support\Facades\DB;
@@ -50,10 +56,10 @@ class ClientController extends Controller
     {
         $status_id = intval($request->input('status_id'));
         if ($status_id == 0) {
-            $records = Client::latest()->get();
+            $records = Client::get();
         } else {
             $active_value = $status_id == 1 ? true : false;
-            $records = Client::latest()->where('status_id', $active_value)->get();
+            $records = Client::where('status_id', $active_value)->get();
         }
         foreach ($records as &$row) {
             $tenancy = app(Environment::class);
@@ -124,9 +130,10 @@ class ClientController extends Controller
             $website = new Website();
             $hostname = new Hostname();
 
-            DB::connection('system')->beginTransaction();
+
 
             try {
+                DB::beginTransaction();
                 $website->uuid = $uuid;
                 app(WebsiteRepository::class)->create($website);
                 $hostname->fqdn = $fqdn;
@@ -149,9 +156,9 @@ class ClientController extends Controller
                 $tenancy = app(Environment::class);
                 $tenancy->tenant($website);
 
-                DB::connection('system')->commit();
+                DB::commit();
             } catch (Exception $e) {
-                DB::connection('system')->rollBack();
+                DB::rollBack();
                 app(HostnameRepository::class)->delete($hostname, true);
                 app(WebsiteRepository::class)->delete($website, true);
 
@@ -172,13 +179,16 @@ class ClientController extends Controller
             DB::connection('tenant')->table('configurations')->insert([
                 'send_auto' => true,
             ]);
-
+            $country = Country::where('short', 'PE')->first();
+            $departament = Department::where('description', 'LIMA')->first();
+            $province  = Province::where('description', 'LIMA')->first();
+            $district  = District::where('description', 'LIMA')->first();
             $establishment_id = DB::connection('tenant')->table('establishments')->insertGetId([
                 'description' => 'Oficina Principal',
-                'country_id' => 'PE',
-                'department_id' => '15',
-                'province_id' => '1501',
-                'district_id' => '150101',
+                'country_id' => $country->id,
+                'department_id' => $departament->id,
+                'province_id' => $province->id,
+                'district_id' => $district->id,
                 'address' => '-',
                 'email' => $request->input('email'),
                 'telephone' => '-',
@@ -193,25 +203,41 @@ class ClientController extends Controller
             ]);
 
             DB::connection('tenant')->table('series')->insert([
-                ['establishment_id' => 1, 'document_type_id' => '01', 'number' => 'F001'],
-                ['establishment_id' => 1, 'document_type_id' => '03', 'number' => 'B001'],
-                ['establishment_id' => 1, 'document_type_id' => '07', 'number' => 'FC01'],
-                ['establishment_id' => 1, 'document_type_id' => '07', 'number' => 'BC01'],
-                ['establishment_id' => 1, 'document_type_id' => '08', 'number' => 'FD01'],
-                ['establishment_id' => 1, 'document_type_id' => '08', 'number' => 'BD01'],
-                ['establishment_id' => 1, 'document_type_id' => '20', 'number' => 'R001'],
-                ['establishment_id' => 1, 'document_type_id' => '09', 'number' => 'T001'],
-                ['establishment_id' => 1, 'document_type_id' => '100', 'number' => 'NV01'],
-                ['establishment_id' => 1, 'document_type_id' => '06', 'number' => 'AN01'],
+                ['establishment_id' => 1, 'document_type_id' => 1, 'number' => 'F001'],
+                ['establishment_id' => 1, 'document_type_id' => 3, 'number' => 'B001'],
+                ['establishment_id' => 1, 'document_type_id' => 4, 'number' => 'FC01'],
+                ['establishment_id' => 1, 'document_type_id' => 4, 'number' => 'BC01'],
+                ['establishment_id' => 1, 'document_type_id' => 5, 'number' => 'FD01'],
+                ['establishment_id' => 1, 'document_type_id' => 5, 'number' => 'BD01'],
+                ['establishment_id' => 1, 'document_type_id' => 7, 'number' => 'R001'],
+                ['establishment_id' => 1, 'document_type_id' => 6, 'number' => 'T001'],
+                ['establishment_id' => 1, 'document_type_id' => 12, 'number' => 'NV01'],
+                ['establishment_id' => 1, 'document_type_id' => 16, 'number' => 'AN01'],
+            ]);
+            $document_number = '00000000';
+            $person = Person::create([
+                'identity_document_type_id' => IdentityDocumentType::DNI,
+                'number' => $document_number,
+                'name' => 'DISOFT SOLUCIONES INTEGRALES S.A.C.',
+                'trade_name' => '-',
+                'country_id' => $country->id,
+                'department_id' => $departament->id,
+                'province_id' => $province->id,
+                'district_id' => $district->id,
+                'address' => 'AV. SANTIAGO ANTUNEZ DE MAYOLO NRO. 1047 INT. 201 URB.  MERCURIO',
+                'email' => 'consulta@disoft.pe',
+                'telephone' => 991992688,
+                'status_id' => Status::ACTIVE 
             ]);
 
             DB::connection('tenant')->table('users')->insert([
-                'name' => 'Administrador',
-                'email' => $request->input('email'),
+                'username' => '00000000',
                 'password' => bcrypt($request->input('password')),
-                'api_token' => $token,
-                'establishment_id' => $establishment_id
+                'remember_token' => $token,
+                'person_id' => $person->id
             ]);
+
+            
 
             // DB::connection('tenant')->table('module_user')->insert([
             //     'module_id' => 7,

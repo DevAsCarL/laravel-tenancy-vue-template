@@ -2,31 +2,35 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::controller(App\Http\Controllers\RegisterController::class)
+Route::get('/', function () {
+    return 'AAA';    
+});
+
+Route::controller(RegisterController::class)
     ->middleware(['guest'])
     ->group(function () {
         Route::get('register', 'show')->name('register');
         Route::post('register', 'store')->name('register.store');
     });
 
-Route::controller(App\Http\Controllers\LoginController::class)
+Route::controller(LoginController::class)
     ->middleware(['guest'])
     ->group(function () {
         Route::get('login', 'show')->name('login');
         Route::post('login', 'store')->name('login.store');
     });
 
-Route::post('logout', App\Http\Controllers\LogoutController::class)
+Route::get('logout', LogoutController::class)
     ->middleware(['auth'])
     ->name('logout');
 
-Route::controller(App\Http\Controllers\HomeController::class)
+Route::controller(HomeController::class)
     ->middleware(['auth'])
     ->group(function () {
         Route::get('/', 'index')->name('home');
     });
 
-Route::controller(App\Http\Controllers\AccountController::class)
+Route::controller(AccountController::class)
     ->prefix('account')
     ->middleware(['auth'])
     ->group(function () {
@@ -34,7 +38,7 @@ Route::controller(App\Http\Controllers\AccountController::class)
         Route::patch('', 'update')->name('account.update');
     });
 
-Route::controller(App\Http\Controllers\OrganisationController::class)
+Route::controller(OrganisationController::class)
     ->prefix('organisation')
     ->middleware(['auth'])
     ->group(function () {

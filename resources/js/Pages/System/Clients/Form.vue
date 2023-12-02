@@ -39,7 +39,7 @@
                     </q-input>
                     <q-select class="col-12 col-md-5" v-model="form.plan_id" :options="plans" label="Plan" />
 
-                    <q-input class="col-12 col-md-5" filled v-model="form.plan_start_date" mask="date" >
+                    <q-input class="col-12 col-md-5" filled v-model="form.plan_start_date" mask="date">
                         <template v-slot:append>
                             <q-icon name="event" class="cursor-pointer">
                                 <q-popup-proxy cover transition-show="scale" transition-hide="scale">
@@ -136,7 +136,6 @@ const create = async () => {
 
 const submit = () => {
     loading_submit.value = true;
-    console.log(form);
     axios
         .post(`/${resource}`, form)
         .then((response) => {

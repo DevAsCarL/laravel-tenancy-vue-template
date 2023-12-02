@@ -10,7 +10,9 @@ class DatabaseTenantSeeder extends Seeder
     {
         $this->call([
             StatusSeeder::class,
-            DocumentTypeSeeder::class,
+            DocumentTypesSeeder::class,
+            IdentityDocumentTypesSeeder::class,
+            SoapTypesSeeder::class,
             LocationSeeder::class
         ]);
     }

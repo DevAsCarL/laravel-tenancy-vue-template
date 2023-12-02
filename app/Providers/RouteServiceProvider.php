@@ -33,10 +33,9 @@ class RouteServiceProvider extends ServiceProvider
         });
     }
 
-    protected function loadRoutesBasedOnTenancy(): void
+    protected function loadRoutesBasedOnTenancy()
     {
         $hostname = app(Environment::class)->hostname();
-
         if ($hostname && $hostname->website) {
             $this->loadTenantRoutes();
         } else {
@@ -47,7 +46,6 @@ class RouteServiceProvider extends ServiceProvider
     protected function loadTenantRoutes(): void
     {
         Route::middleware('web')
-            ->domain('{tenant}.' . config('tenancy.central_domain'))
             ->namespace('App\Http\Controllers\Tenant')
             ->group(base_path('routes/tenant.php'));
     }

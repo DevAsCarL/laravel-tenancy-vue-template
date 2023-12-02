@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\System\Status;
+use App\Models\Tenant\Status;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -14,9 +14,10 @@ class CreateDocumentTypesTable extends Migration
     {
         Schema::create('document_types', function (Blueprint $table) {
             $table->id();
-            $table->string('short', 255)->nullable();
+            $table->unsignedInteger('code');
+            $table->string('short', 3)->nullable();
             $table->string('description', 255);
-            $table->foreignIdFor(Status::class)->default(1)->constrained('status')->cascadeOnDelete();
+            $table->foreignIdFor(Status::class)->default(Status::ACTIVE)->constrained('status')->cascadeOnDelete();
             $table->timestamps();
         });
     }
