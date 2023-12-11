@@ -2,10 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return 'AAA';    
-});
-
 Route::controller(RegisterController::class)
     ->middleware(['guest'])
     ->group(function () {

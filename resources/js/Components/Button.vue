@@ -1,5 +1,5 @@
 <template>
-    <button class="rounded-md w-full bg-slate-800 px-6 py-3 text-sm font-semibold text-white shadow-sm hover:bg-slate-500">
+    <button class="tw-rounded-md tw-w-full tw-bg-slate-800 tw-px-6 tw-py-3 tw-text-sm tw-font-semibold tw-text-white tw-shadow-sm hover:tw-bg-slate-500">
         <span v-text="text"></span>
     </button>
 </template>

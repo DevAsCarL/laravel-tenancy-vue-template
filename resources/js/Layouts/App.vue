@@ -4,7 +4,7 @@
     </Head>
 
     <div class="tw-min-h-full">
-        <!-- <Header :menu="menu" /> -->
+        <Header :menu="menu" />
 
         <main>
             <div class="tw-mx-auto tw-max-w-7xl tw-px-4 tw-sm:px-6 tw-lg:px-8">

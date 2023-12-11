@@ -85,7 +85,12 @@
 <script setup lang="ts">
 import Button from "@/js/Components/Button.vue";
 import { useForm } from "@inertiajs/vue3";
-import GuestLayout from "@js/Layouts/Guest.vue";
+import App from "@js/Layouts/Tenant/App.vue";
+import { ref } from "vue";
+
+defineOptions({
+    layout: App,
+  });
 
 const props = defineProps<{
   email: string;
