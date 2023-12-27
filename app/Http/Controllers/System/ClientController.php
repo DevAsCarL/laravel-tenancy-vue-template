@@ -229,7 +229,6 @@ class ClientController extends Controller
                 'telephone' => 991992688,
                 'status_id' => Status::ACTIVE 
             ]);
-
             DB::connection('tenant')->table('users')->insert([
                 'username' => '00000000',
                 'password' => bcrypt($request->input('password')),

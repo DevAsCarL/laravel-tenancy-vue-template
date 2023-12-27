@@ -3,6 +3,7 @@
 namespace App\Models\Tenant;
 
 use Hyn\Tenancy\Abstracts\TenantModel;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Person extends TenantModel
 {
@@ -62,17 +63,20 @@ class Person extends TenantModel
     public function getAddressFullAttribute()
     {
         $address = trim($this->address);
-        $address = ($address === '-' || $address === '')?'':$address.' ,';
+        $address = ($address === '-' || $address === '') ? '' : $address . ' ,';
         if ($address === '') {
             return '';
         }
 
-        if(!is_null($this->department_id) && !is_null($this->province_id) && !is_null($this->district_id))
-        {
+        if (!is_null($this->department_id) && !is_null($this->province_id) && !is_null($this->district_id)) {
             return "{$address} {$this->department->description} - {$this->province->description} - {$this->district->description}";
-        }
-        else {
+        } else {
             return $address;
         }
+    }
+
+    public function user(): HasOne
+    {
+        return $this->hasOne(User::class);
     }
 }

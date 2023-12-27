@@ -11,7 +11,7 @@
 
     @routes
 
-    @vite(['resources/scss/app.scss', 'resources/js/app.ts'])
+    @vite(['resources/scss/app.scss', 'resources/js/app.js'])
 
     @inertiaHead
 

@@ -4,10 +4,15 @@ namespace App\Models\Tenant;
 
 use Hyn\Tenancy\Abstracts\TenantModel;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Auth\Authenticatable as AuthenticatableTrait;
 
-class User extends TenantModel
+class User extends TenantModel implements Authenticatable
 {
+    use AuthenticatableTrait;
+
     protected $fillable = [
         'person_id',
         'username',
@@ -28,7 +33,7 @@ class User extends TenantModel
     protected function fullName(): Attribute
     {
         return Attribute::make(
-            get: fn () => \trim($this->first_name.' '.$this->last_name),
+            get: fn () => \trim($this->first_name . ' ' . $this->last_name),
         );
     }
 
@@ -66,5 +71,10 @@ class User extends TenantModel
     public function getFilamentName(): string
     {
         return $this->fullName;
+    }
+
+    public function person(): BelongsTo
+    {
+        return $this->belongsTo(Person::class);
     }
 }

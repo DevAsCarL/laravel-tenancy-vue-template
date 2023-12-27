@@ -14,11 +14,13 @@
         "laravel/sanctum": "^3.3",
         "laravel/tinker": "^2.8",
         "livewire/livewire": "^3.2",
+        "nwidart/laravel-modules": "^10.0",
         "predis/predis": "^2.2",
         "rappasoft/laravel-livewire-tables": "^3.1",
         "spatie/laravel-permission": "^6.1",
         "tenancy/hooks-migration": "^2.1",
-        "tightenco/ziggy": "^1.6"
+        "tightenco/ziggy": "^1.6",
+        "toanld/modules-inertia": "^1.2"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.9",
@@ -35,6 +37,7 @@
     "autoload": {
         "psr-4": {
             "App\\": "app/",
+            "Modules\\": "Modules/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/"
         }
